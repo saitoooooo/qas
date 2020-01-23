@@ -11,10 +11,6 @@
                 </div>
                 <div>
                     @if (Auth::id() == $micropost->user_id)
-                        @include('users.favorite_button', ['user' => $user])
-                        {!! Form::open(['route' => ['microposts.destroy', $micropost->id], 'method' => 'delete']) !!}
-                            {!! Form::submit('Delete', ['class' => 'btn btn-outline-danger']) !!}
-                        {!! Form::close() !!}
                     @else
                         @include('users.favorite_button', ['user' => $user])
                     @endif
