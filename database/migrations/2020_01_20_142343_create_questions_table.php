@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMicropostsTable extends Migration
+class CreateQuestionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateMicropostsTable extends Migration
      */
     public function up()
     {
-        Schema::create('microposts', function (Blueprint $table) {
+        Schema::create('questions', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned()->index();
             $table->string('content');
@@ -31,6 +31,6 @@ class CreateMicropostsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('microposts');
+        Schema::dropIfExists('questions');
     }
 }

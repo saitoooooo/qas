@@ -4,18 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class MicropostsController extends Controller
+class QuestionsController extends Controller
 {
     public function index()
     {
         $data = [];
         if (\Auth::check()) {
             $user = \Auth::user();
-            $microposts = $user->feed_microposts()->orderBy('created_at', 'desc')->paginate(10);
+            $questions = $user->feed_questions()->orderBy('created_at', 'desc')->paginate(10);
             
             $data = [
                 'user' => $user,
-                'microposts' => $microposts,
+                'questions' => $questions,
             ];
         }
         
@@ -27,7 +27,7 @@ class MicropostsController extends Controller
             'content' => 'required|max:191',
         ]);
 
-        $request->user()->microposts()->create([
+        $request->user()->questions()->create([
             'content' => $request->content,
         ]);
 
@@ -35,10 +35,10 @@ class MicropostsController extends Controller
     }
     public function destroy($id)
     {
-        $micropost = \App\Micropost::find($id);
+        $question = \App\Question::find($id);
 
-        if (\Auth::id() === $micropost->user_id) {
-            $micropost->delete();
+        if (\Auth::id() === $question->user_id) {
+            $question->delete();
         }
 
         return back();

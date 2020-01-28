@@ -8,15 +8,15 @@
             </aside>
             <div class="col-sm-8">
                 @if (Auth::id() == $user->id)
-                    {!! Form::open(['route' => 'microposts.store']) !!}
+                    {!! Form::open(['route' => 'questions.store']) !!}
                         <div class="form-group">
                             {!! Form::textarea('content', old('content'), ['class' => 'form-control', 'rows' => '2']) !!}
                             {!! Form::submit('Post', ['class' => 'btn btn-primary btn-block']) !!}
                         </div>
                     {!! Form::close() !!}
                 @endif
-                @if (count($microposts) > 0)
-                    @include('microposts.microposts', ['microposts' => $microposts])
+                @if (count($questions) > 0)
+                    @include('questions.questions', ['questions' => $questions])
                 @endif
             </div>
         </div>

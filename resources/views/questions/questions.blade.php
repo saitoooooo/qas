@@ -1,18 +1,18 @@
 <ul class="media-list">
-    @foreach ($microposts as $micropost)
+    @foreach ($questions as $question)
         <li class="media mb-3">
-            <img class="mr-2 rounded" src="{{ Gravatar::src($micropost->user->email, 50) }}" alt="">
+            <img class="mr-2 rounded" src="{{ Gravatar::src($question->user->email, 50) }}" alt="">
             <div class="media-body">
                 <div>
-                    {!! link_to_route('users.show', $micropost->user->name, ['id' => $micropost->user->id]) !!} <span class="text-muted">posted at {{ $micropost->created_at }}</span>
+                    {!! link_to_route('users.show', $question->user->name, ['id' => $question->user->id]) !!} <span class="text-muted">posted at {{ $question->created_at }}</span>
                 </div>
                 <div>
-                    <p class="mb-0">{!! nl2br(e($micropost->content)) !!}</p>
+                    <p class="mb-0">{!! nl2br(e($question->content)) !!}</p>
                 </div>
                 <div>
-                    @if (Auth::id() == $micropost->user_id)
+                    @if (Auth::id() == $question->user_id)
                         @include('users.favorite_button', ['user' => $user])
-                        {!! Form::open(['route' => ['microposts.destroy', $micropost->id], 'method' => 'delete']) !!}
+                        {!! Form::open(['route' => ['questions.destroy', $question->id], 'method' => 'delete']) !!}
                             {!! Form::submit('Delete', ['class' => 'btn btn-outline-danger']) !!}
                         {!! Form::close() !!}
                     @else
@@ -23,4 +23,4 @@
         </li>
     @endforeach
 </ul>
-{{ $microposts->links('pagination::bootstrap-4') }}
+{{ $questions->links('pagination::bootstrap-4') }}

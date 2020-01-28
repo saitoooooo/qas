@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Micropost extends Model
+class Question extends Model
 {
     protected $fillable = ['content', 'user_id'];
 
@@ -14,6 +14,6 @@ class Micropost extends Model
     }
     public function favorite_users()
     {
-        return $this->belongsToMany(Micropost::class, 'favorites', 'micropost_id', 'user_id')->withTimestamps();
+        return $this->belongsToMany(Question::class, 'favorites', 'question_id', 'user_id')->withTimestamps();
     }
 }
