@@ -11,8 +11,9 @@ class QuestionsController extends Controller
         $data = [];
         if (\Auth::check()) {
             $user = \Auth::user();
-            $questions = $user->feed_questions()->orderBy('created_at', 'desc')->paginate(10);
-            
+            $questions = $user->questions()->orderBy('created_at', 'desc')->paginate(10);
+
+            $questions = \App\Question::paginate(10);
             $data = [
                 'user' => $user,
                 'questions' => $questions,

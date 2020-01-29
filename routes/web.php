@@ -35,5 +35,10 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('favorite', 'FavoritesController@store')->name('favorites.favorite');
         Route::delete('unfavorite', 'FavoritesController@destroy')->name('favorites.unfavorite');
     });
+    Route::resource('feed', 'FeedController', ['only' => ['index']]);
+    Route::group(['prefix' => 'feed'], function () {
+        Route::get('new', 'FeedController@new')->name('feed.new');
+        Route::get('follow', 'FeedController@follow')->name('feed.follow');
+    });
     Route::resource('questions', 'QuestionsController', ['only' => ['store', 'destroy']]);
 });

@@ -7,7 +7,7 @@
                     {!! link_to_route('users.show', $question->user->name, ['id' => $question->user->id]) !!} <span class="text-muted">posted at {{ $question->created_at }}</span>
                 </div>
                 <div>
-                    <p class="mb-0">{!! nl2br(e($question->content)) !!}</p>
+                    <p class="mb-0"><a href=#>{!! nl2br(e($question->content)) !!}</a></p>
                 </div>
                 <div>
                     @if (Auth::id() == $question->user_id)
