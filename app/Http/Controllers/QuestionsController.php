@@ -6,42 +6,44 @@ use Illuminate\Http\Request;
 
 class QuestionsController extends Controller
 {
-    public function index()
+
+    
+    public function create()
     {
         $data = [];
         if (\Auth::check()) {
             $user = \Auth::user();
-            $questions = $user->questions()->orderBy('created_at', 'desc')->paginate(10);
+            $question = new \App\Question;
 
-            $questions = \App\Question::paginate(10);
             $data = [
                 'user' => $user,
-                'questions' => $questions,
+                'question' => $question,
             ];
         }
         
-        return view('welcome', $data);
+        return view('questions.editor', $data);
     }
+    
     public function store(Request $request)
     {
         $this->validate($request, [
             'content' => 'required|max:191',
+            'title' => 'required|max:191',
         ]);
 
         $request->user()->questions()->create([
             'content' => $request->content,
+            'title' => $request->title,
         ]);
 
         return back();
     }
-    public function destroy($id)
+    public function show($id)
     {
         $question = \App\Question::find($id);
 
-        if (\Auth::id() === $question->user_id) {
-            $question->delete();
-        }
-
-        return back();
+        return view('questions.show', [
+            'question' => $question,
+        ]);
     }
 }

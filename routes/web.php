@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', 'QuestionsController@index');
+Route::get('/', 'FeedController@index');
 
 Route::get('signup', 'Auth\RegisterController@showRegistrationForm')->name('signup.get');
 Route::post('signup', 'Auth\RegisterController@register')->name('signup.post');
@@ -31,14 +31,17 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('followers', 'UsersController@followers')->name('users.followers');
         Route::get('favorites', 'UsersController@favorites')->name('users.favorites');
     });
+    
     Route::group(['prefix' => 'Questions/{id}'], function () {
         Route::post('favorite', 'FavoritesController@store')->name('favorites.favorite');
         Route::delete('unfavorite', 'FavoritesController@destroy')->name('favorites.unfavorite');
     });
+    
     Route::resource('feed', 'FeedController', ['only' => ['index']]);
     Route::group(['prefix' => 'feed'], function () {
         Route::get('new', 'FeedController@new')->name('feed.new');
         Route::get('follow', 'FeedController@follow')->name('feed.follow');
     });
-    Route::resource('questions', 'QuestionsController', ['only' => ['store', 'destroy']]);
+    
+    Route::resource('questions', 'QuestionsController', ['only' => ['store', 'create', 'show']]);
 });

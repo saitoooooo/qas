@@ -11,7 +11,7 @@ class FeedController extends Controller
         $data = [];
         if (\Auth::check()) {
             $user = \Auth::user();
-            $questions = \App\Question::paginate(10);
+            $questions = \App\Question::orderBy('created_at', 'desc')->paginate(10);
             $data = [
                 'user' => $user,
                 'questions' => $questions,
@@ -24,7 +24,7 @@ class FeedController extends Controller
         $data = [];
         if (\Auth::check()) {
             $user = \Auth::user();
-            $questions = \App\Question::paginate(10);
+            $questions = \App\Question::orderBy('created_at', 'desc')->paginate(10);
             $data = [
                 'user' => $user,
                 'questions' => $questions,

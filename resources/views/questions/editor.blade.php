@@ -3,19 +3,19 @@
 @section('content')
     @if (Auth::check())
         <div class="row">
-            <aside class="col-sm-4">
-                @include('users.card', ['user' => Auth::user()])
-            </aside>
-            <div class="col-sm-8">
                 @if (Auth::id() == $user->id)
                     {!! Form::open(['route' => 'questions.store']) !!}
                         <div class="form-group">
-                            {!! Form::textarea('content', old('content'), ['class' => 'form-control', 'rows' => '2']) !!}
-                            {!! Form::submit('Post', ['class' => 'btn btn-primary btn-block']) !!}
+                            {!! Form::label('title', 'タイトル：') !!}
+                            {!! Form::text('title', old('title'), ['class' => 'form-control', 'rows' => '2']) !!}
                         </div>
+                        <div class="form-group">
+                            {!! Form::label('content', '質問の詳細：') !!}
+                            {!! Form::textarea('content', old('content'), ['class' => 'form-control', 'rows' => '2']) !!}
+                        </div>
+                            {!! Form::submit('Post', ['class' => 'btn btn-primary btn-block']) !!}
                     {!! Form::close() !!}
                 @endif
-            </div>
         </div>
     @else
         <div class="center jumbotron">
