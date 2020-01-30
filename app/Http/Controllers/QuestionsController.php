@@ -40,10 +40,17 @@ class QuestionsController extends Controller
     }
     public function show($id)
     {
-        $question = \App\Question::find($id);
+        $data = [];
+        if (\Auth::check()) {
+            $user = \Auth::user();
+            $question = \App\Question::find($id);
 
-        return view('questions.show', [
-            'question' => $question,
-        ]);
+            $data = [
+                'user' => $user,
+                'question' => $question,
+            ];
+        }
+        
+        return view('questions.show', $data);
     }
 }

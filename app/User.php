@@ -127,4 +127,8 @@ class User extends Authenticatable
             return false;
         }
     }
+    public function answers()
+    {
+        return $this->hasMany(Answer::class);
+    }
 }

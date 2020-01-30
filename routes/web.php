@@ -44,4 +44,5 @@ Route::group(['middleware' => ['auth']], function () {
     });
     
     Route::resource('questions', 'QuestionsController', ['only' => ['store', 'create', 'show']]);
+    Route::resource('answers', 'AnswersController', ['only' => ['store']]);
 });
