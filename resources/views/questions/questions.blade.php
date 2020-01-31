@@ -4,11 +4,10 @@
             <img class="mr-2 rounded" src="{{ Gravatar::src($question->user->email, 50) }}" alt="">
             <div class="media-body">
                 <div>
-                    {!! link_to_route('questions.show', $question->title, ['id' => $question->id]) !!}
-
+                    <h2>{!! link_to_route('questions.show', $question->title, ['id' => $question->id]) !!}</h2>
                </div>
                 <div>
-                    {!! link_to_route('users.show', $question->user->name, ['id' => $question->user->id]) !!} <span class="text-muted">posted at {{ $question->created_at }}</span>
+                    <p>{!! link_to_route('users.show', $question->user->name, ['id' => $question->user->id]) !!} <span class="text-muted">posted at {{ $question->created_at }}</span></p>
                 </div>
             </div>
         </li>

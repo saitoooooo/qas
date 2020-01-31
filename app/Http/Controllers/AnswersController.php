@@ -10,10 +10,13 @@ class AnswersController extends Controller
     {
         $this->validate($request, [
             'content' => 'required|max:191',
+            'question_id' => 'required|max:191',
         ]);
+        
 
         $request->user()->answers()->create([
             'content' => $request->content,
+            'question_id' => $request->question_id,
         ]);
         return back();
     }

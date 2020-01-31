@@ -44,10 +44,12 @@ class QuestionsController extends Controller
         if (\Auth::check()) {
             $user = \Auth::user();
             $question = \App\Question::find($id);
+            $answers = \App\Answer::where('question_id', $question->id)->orderBy('created_at', 'desc')->get();
 
             $data = [
                 'user' => $user,
                 'question' => $question,
+                'answers' => $answers,
             ];
         }
         

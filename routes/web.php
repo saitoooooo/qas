@@ -32,7 +32,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('favorites', 'UsersController@favorites')->name('users.favorites');
     });
     
-    Route::group(['prefix' => 'Questions/{id}'], function () {
+    Route::group(['prefix' => 'questions/{id}'], function () {
         Route::post('favorite', 'FavoritesController@store')->name('favorites.favorite');
         Route::delete('unfavorite', 'FavoritesController@destroy')->name('favorites.unfavorite');
     });
@@ -45,4 +45,5 @@ Route::group(['middleware' => ['auth']], function () {
     
     Route::resource('questions', 'QuestionsController', ['only' => ['store', 'create', 'show']]);
     Route::resource('answers', 'AnswersController', ['only' => ['store']]);
+    Route::resource('comments', 'CommentsController', ['only' => ['store']]);
 });
