@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Answer extends Model
 {
-    protected $fillable = ['content', 'user_id', 'question_id', 'content'];
+    protected $fillable = ['content', 'user_id', 'question_id', 'content', 'parent_answer_id'];
 
     public function user()
     {
@@ -15,9 +15,5 @@ class Answer extends Model
     public function question()
     {
         return $this->belongsTo(Question::class);
-    }
-    public function comment()
-    {
-        return $this->hasMany(Commentr::class);
     }
 }
