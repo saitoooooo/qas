@@ -45,7 +45,6 @@ class QuestionsController extends Controller
             $user = \Auth::user();
             $question = \App\Question::find($id);
             $answers = \App\Answer::where('question_id', $question->id)->orderBy('created_at', 'desc')->get();
-
             $data = [
                 'user' => $user,
                 'question' => $question,

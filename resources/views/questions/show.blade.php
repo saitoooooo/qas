@@ -14,5 +14,6 @@
                         {!! Form::submit('Post', ['class' => 'btn btn-primary btn-block']) !!}
                     </div>
                 {!! Form::close() !!}
+                @include('post.create')
             @endif
 @endsection
