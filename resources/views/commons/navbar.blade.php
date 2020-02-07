@@ -1,6 +1,6 @@
-<header class="mb-4">
-    <nav class="navbar navbar-expand-sm navbar-dark bg-dark"> 
-        <a class="navbar-brand" href="/">Microposts</a>
+<header class="mb-2 border-bottom">
+    <nav class="navbar navbar-expand-sm navbar-light" style="background-color: #ffffff;">
+        <a class="navbar-brand" href="/">QA</a>
          
         <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#nav-bar">
             <span class="navbar-toggler-icon"></span>
@@ -26,6 +26,11 @@
                     <li class="nav-item">{!! link_to_route('login', 'Login', [], ['class' => 'nav-link']) !!}</li>
                 @endif
             </ul>
+
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Search</button>
+        </form>
         </div>
     </nav>
 </header>

@@ -131,4 +131,46 @@ class User extends Authenticatable
     {
         return $this->hasMany(Answer::class);
     }
+
+    //category follow
+    //Followしたカテゴリ取得
+    public function category_followings()
+    {
+        return $this->belongsToMany(Category::class, 'category_follow', 'user_id', 'category_id')->withTimestamps();
+    }
+    //フォローしているカテゴリか判定,exists(DBの存在チェック)
+    public function is_category_followed($categoryId)
+    {
+        return $this->favorites()->where('category_id', $categoryId)->exists();
+    }
+    
+    //Categoryをフォローする
+    public function category_follow($categoryId)
+    {
+        // 既にフォローしているかの確認
+        $exist = $this->is_category_followed($categoryId);
+
+        if ($exist) {
+            // 既にフォローしていれば何もしない
+            return false;
+        } else {
+            // 未フォローであればフォローする
+            $this->category_followings()->attach($categoryId);
+            return true;
+        }
+    }
+    public function category_unfollow($categoryId)
+    {
+        // 既にフォローしているかの確認
+        $exist = $this->is_favorites($categoryId);
+
+        if ($exist) {
+            // 既にフォローしていればフォローを外す
+            $this->category_followings()->detach($categoryId);
+            return true;
+        } else {
+            // 未フォローであれば何もしない
+            return false;
+        }
+    }
 }

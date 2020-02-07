@@ -5,7 +5,10 @@
             <div class="media-body">
                 <div>
                     <h2>{!! link_to_route('questions.show', $question->title, ['id' => $question->id]) !!}</h2>
-               </div>
+                </div>
+                <div>
+                    <p><span class="badge badge-info">{{ $question->category->name }}</span></p>
+                </div>
                 <div>
                     <p>{!! link_to_route('users.show', $question->user->name, ['id' => $question->user->id]) !!} <span class="text-muted">posted at {{ $question->created_at }}</span></p>
                 </div>

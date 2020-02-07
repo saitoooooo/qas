@@ -30,11 +30,17 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('followings', 'UsersController@followings')->name('users.followings');
         Route::get('followers', 'UsersController@followers')->name('users.followers');
         Route::get('favorites', 'UsersController@favorites')->name('users.favorites');
+        Route::get('category_followings', 'UsersController@category_followings')->name('users.followings');        
     });
     
     Route::group(['prefix' => 'questions/{id}'], function () {
         Route::post('favorite', 'FavoritesController@store')->name('favorites.favorite');
         Route::delete('unfavorite', 'FavoritesController@destroy')->name('favorites.unfavorite');
+    });
+    
+    Route::group(['prefix' => 'categories/{id}'], function () {
+        Route::post('category_follow', 'CategoryFollowController@store')->name('categories.follow');
+        Route::delete('category_unfollow', 'CategoryFollowController@destroy')->name('categories.unfollow');
     });
     
     Route::resource('feed', 'FeedController', ['only' => ['index']]);
@@ -43,8 +49,9 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('follow', 'FeedController@follow')->name('feed.follow');
     });
     
-    Route::resource('questions', 'QuestionsController', ['only' => ['store', 'create', 'show']]);
     Route::resource('answers', 'AnswersController', ['only' => ['store']]);
     
-    Route::post('posts', 'PostsController@create');
+    Route::resource('questions', 'QuestionsController', ['only' => ['store', 'create', 'show']]);    
+
+    Route::get('category', 'QuestionsController@category')->name('category.show');
 });

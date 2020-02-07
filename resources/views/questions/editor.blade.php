@@ -2,18 +2,27 @@
 
 @section('content')
     @if (Auth::check())
-        <div class="row">
+        <div class="clearfix">
                 @if (Auth::id() == $user->id)
                     {!! Form::open(['route' => 'questions.store']) !!}
                         <div class="form-group">
                             {!! Form::label('title', 'タイトル：') !!}
-                            {!! Form::text('title', old('title'), ['class' => 'form-control', 'rows' => '2']) !!}
+                            {!! Form::text('title', old('title'), ['class' => 'form-control']) !!}
+                        </div>
+                        <label for="category">Category:</label>
+                        <div>
+                            <select name="category" class="form-control">
+                                <option value="default">Categoryを選択してください</option>
+                                    @foreach($categories as $category)
+                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    @endforeach
+                            </select>
                         </div>
                         <div class="form-group">
                             {!! Form::label('content', '質問の詳細：') !!}
-                            {!! Form::textarea('content', old('content'), ['class' => 'form-control', 'rows' => '2']) !!}
+                            {!! Form::textarea('content', old('content'), ['class' => 'form-control', 'id' => 'mde']) !!}
                         </div>
-                            {!! Form::submit('Post', ['class' => 'btn btn-primary btn-block']) !!}
+                            {!! Form::submit('Post', ['class' => 'btn btn-info btn-lg float-right']) !!}
                     {!! Form::close() !!}
                 @endif
         </div>

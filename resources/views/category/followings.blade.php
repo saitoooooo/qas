@@ -7,9 +7,7 @@
         </aside>
         <div class="col-sm-8">
             @include('users.navtabs', ['user' => $user])
-            @if (count($questions) > 0)
-                @include('questions.questions', ['questions' => $questions])
-            @endif
+            @include('category.categories_list', ['categories' => $categories])
         </div>
     </div>
 @endsection
